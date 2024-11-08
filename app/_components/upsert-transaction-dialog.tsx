@@ -34,9 +34,9 @@ import {
 import { DatePicker } from "./ui/date-picker";
 import { z } from "zod";
 import {
+  TransactionType,
   TransactionCategory,
   TransactionPaymentMethod,
-  TransactionType,
 } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -120,10 +120,11 @@ const UpsertTransactionDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {isUpdate ? "Atualizar Transação" : "Adicionar Transação"}
+            {isUpdate ? "Atualizar" : "Criar"} transação
           </DialogTitle>
-          <DialogDescription>inisira as informações abaixo</DialogDescription>
+          <DialogDescription>Insira as informações abaixo</DialogDescription>
         </DialogHeader>
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -133,12 +134,8 @@ const UpsertTransactionDialog = ({
                 <FormItem>
                   <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Digite o nome da transação..."
-                      {...field}
-                    />
+                    <Input placeholder="Digite o nome..." {...field} />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -151,7 +148,8 @@ const UpsertTransactionDialog = ({
                   <FormLabel>Valor</FormLabel>
                   <FormControl>
                     <MoneyInput
-                      placeholder="Digite o valor da transação..."
+                      placeholder="Digite o valor..."
+                      value={field.value}
                       onValueChange={({ floatValue }) =>
                         field.onChange(floatValue)
                       }
@@ -159,12 +157,10 @@ const UpsertTransactionDialog = ({
                       disabled={field.disabled}
                     />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="type"
@@ -177,7 +173,7 @@ const UpsertTransactionDialog = ({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione o tipo" />
+                        <SelectValue placeholder="Select a verified email to display" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -192,7 +188,6 @@ const UpsertTransactionDialog = ({
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="category"
@@ -205,7 +200,7 @@ const UpsertTransactionDialog = ({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione a categoria" />
+                        <SelectValue placeholder="Selecione a categoria..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -220,7 +215,6 @@ const UpsertTransactionDialog = ({
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="paymentMethod"
@@ -233,7 +227,7 @@ const UpsertTransactionDialog = ({
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Selecione um método de pagamento" />
+                        <SelectValue placeholder="Selecione um método de pagamento..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -248,7 +242,6 @@ const UpsertTransactionDialog = ({
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="date"
@@ -260,7 +253,6 @@ const UpsertTransactionDialog = ({
                 </FormItem>
               )}
             />
-
             <DialogFooter>
               <DialogClose asChild>
                 <Button type="button" variant="outline">

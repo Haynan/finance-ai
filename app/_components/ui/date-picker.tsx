@@ -28,7 +28,7 @@ export const DatePicker = ({ value, onChange }: DatePickerProps) => {
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {value ? (
-            new Date(value).toLocaleDateString("PT-BR", {
+            new Date(value).toLocaleDateString("pt-BR", {
               day: "2-digit",
               month: "long",
               year: "numeric",

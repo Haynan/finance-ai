@@ -39,7 +39,7 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "date",
     header: "Data",
     cell: ({ row: { original: transaction } }) =>
-      new Date(transaction.date).toLocaleDateString("PT-BR", {
+      new Date(transaction.date).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "long",
         year: "numeric",
@@ -49,14 +49,14 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "amount",
     header: "Valor",
     cell: ({ row: { original: transaction } }) =>
-      new Intl.NumberFormat("PT-BR", {
+      new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL",
       }).format(Number(transaction.amount)),
   },
   {
     accessorKey: "actions",
-    header: "",
+    header: "Ações",
     cell: ({ row: { original: transaction } }) => {
       return (
         <div className="space-x-1">
